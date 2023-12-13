@@ -103,7 +103,7 @@ function displayData(){
         cartona += ` <tr>
         <td>${productList[i].name}</td>
         <td>${productList[i].price}</td>
-        <td>${productList[i].category}y</td>
+        <td>${productList[i].category}</td>
         <td>${productList[i].desc}</td>
     </tr>`
     }
