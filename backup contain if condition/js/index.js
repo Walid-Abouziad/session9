@@ -60,19 +60,8 @@ var productNameInput = document.getElementById("productNameInput");
 var productPriceInput = document.getElementById("productPriceInput");
 var productCategoryInput = document.getElementById("productCategoryInput");
 var productDescriptionInput = document.getElementById("productDescriptionInput");
-
-var searchInput = document.getElementById("searchInput");
-var updateBtn = document.getElementById("updateBtn");
-var addteBtn = document.getElementById("addBtn");
-var indexUpdate = 0;
 // console.log(productNameInput , productPriceInput , productCategoryInput , productDescriptionInput);
 var productList =[];
-
-if(localStorage.getItem("products") !=null){
-    productList = JSON.parse(localStorage.getItem("products"));
-    displayData()
-
-}
 
 
 // start add function
@@ -95,10 +84,12 @@ function addProduct(){
 
         var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
         var regex = new RegExp(expression);
-
+    if (productNameInput.value.length<3) {
+      alert("Name must contain at least 3 characters");
+      return false;
+    }else if (productCategoryInput.value.match(regex)){
+        // console.log(product);
     productList.push(product);
-    localStorage.setItem("products",JSON.stringify(productList));
-    console.log(productList);
 
     // clearform is ready created function below
     clearForm();
@@ -106,6 +97,10 @@ function addProduct(){
     
      // displayData is ready created function below
     displayData();
+    }else {
+        alert("add valid url");
+      }
+    
 }
 
 // we can use this clear form anywhere
@@ -125,10 +120,6 @@ function displayData(){
         <td>${productList[i].price}</td>
         <td>${productList[i].category}</td>
         <td>${productList[i].desc}</td>
-        <td>
-            <button class="btn btn-outline-warning btn-sm" onclick="setData(${i})">Update</button>
-            <button class="btn btn-outline-danger btn-sm" onclick="deleteProduct(${i})">Delete</button>
-        </td>
     </tr>`
     }
     // console.log(cartona);
@@ -136,72 +127,4 @@ function displayData(){
 
 }
 
-function deleteProduct(elementNumber){
-    productList.splice(elementNumber,1);
-    localStorage.setItem("products",JSON.stringify(productList));
-    displayData();
-}
 
-// explain for some sting method we will use
-
-// return true or false and it is sensitive
-// console.log("ahmed menisy".includes("ah") );
-
-// transfer all letters to lower or upper case
-// console.log("Ahmed menisy".toLowerCase() );
-
-
-
-// search is a filter display and we will use disply code and modify it
-
-function searchProduct(){
-    var term =searchInput.value;
-    var cartona = "";
-
-    for( var i=0 ; i<productList.length  ; i++){
-        if(productList[i].name.toLowerCase().includes(term.toLowerCase())){
-        cartona += ` <tr>
-        <td>${productList[i].name}</td>
-        <td>${productList[i].price}</td>
-        <td>${productList[i].category}</td>
-        <td>${productList[i].desc}</td>
-        <>
-        <button class="btn btn-outline-warning btn-sm" onclick="setData(${i})">Update</button>
-        <button class="btn btn-outline-danger btn-sm" onclick="deleteProduct(${i})">Delete</button>
-        </td>
-    </tr>`
-    }    
-}
-    // console.log(cartona);
-    document.getElementById("tableBody").innerHTML = cartona;
-}
-
-// update is same as add with some modification
-
-function setData(index){
-    // alert(index);
-    indexUpdate = index ;
-    var currentProduct = productList[index];
-    // console.log(currentProduct);
-    productNameInput.value = currentProduct.name;
-    // console.log(productNameInput);
-    productPriceInput.value = currentProduct.price;
-    productCategoryInput.value = currentProduct.category;
-    productDescriptionInput.value = currentProduct.desc;
-    updateBtn.classList.remove("d-none");
-    addteBtn.classList.add("d-none");
-}
-function updateProduct(){
-    var product = {
-        name: productNameInput.value ,
-        price: productPriceInput.value ,
-        category: productCategoryInput.value ,
-        desc: productDescriptionInput.value ,
-    };
-    productList.splice(indexUpdate,1,product);
-    localStorage.setItem("products",JSON.stringify(productList));
-    displayData()
-    updateBtn.classList.add("d-none");
-    addteBtn.classList.remove("d-none");
-    clearForm ()
-}

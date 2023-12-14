@@ -45,14 +45,7 @@
                         <label for="productDescriptionInput">Procuct Description:</label>
                         <textarea class="form-control" id="productDescriptionInput" required></textarea>
                   </div> 
-                  <button onclick="addProduct()" class="btn btn-primary mt-3 w-100" id="addBtn">Add Product</button>
-                  <button onclick="updateProduct()" class="btn btn-primary mt-3 w-100 d-none" id="updateBtn">update Product</button>
-                  
-            </div>
-            <section class="container">
-                  <div>
-                        <input id="searchInput" oninput="searchProduct()" type="text" class="form-control my-3 w-75 mx-auto" placeholder="Search">
-                  </div>
+                  <button onclick="addProduct()" class="btn btn-primary mt-3 w-100">Add Product</button>
                   <table class="table my-3 text-center">
                         <thead>
                               <tr>
@@ -60,7 +53,6 @@
                                     <th>Price</th>
                                     <th>Category</th>
                                     <th>Description</th>
-                                    <th>Action</th>
                               </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -68,7 +60,7 @@
                         </tbody>
 
                   </table>             
-            </section>
+            </div>
             <nav>
                   <div class="nav-logo"></div>
                   <div class="nav-menu"></div>
