@@ -60,14 +60,22 @@ var productNameInput = document.getElementById("productNameInput");
 var productPriceInput = document.getElementById("productPriceInput");
 var productCategoryInput = document.getElementById("productCategoryInput");
 var productDescriptionInput = document.getElementById("productDescriptionInput");
+// console.log(productNameInput , productPriceInput , productCategoryInput , productDescriptionInput);
 
+// create general vriable for search input
 var searchInput = document.getElementById("searchInput");
+
+// create general vriable for buttons
 var updateBtn = document.getElementById("updateBtn");
 var addteBtn = document.getElementById("addBtn");
+
+// create general vriable for current index on click
 var indexUpdate = 0;
-// console.log(productNameInput , productPriceInput , productCategoryInput , productDescriptionInput);
+
+// create general variable for array caary all products
 var productList =[];
 
+// if condition to avoid error if the local storage is empty , these data is from below operation but we put it at the begining of code to avoid the error
 if(localStorage.getItem("products") !=null){
     productList = JSON.parse(localStorage.getItem("products"));
     displayData()
@@ -75,10 +83,8 @@ if(localStorage.getItem("products") !=null){
 }
 
 
-// start add function
-
+// start add operation
 function addProduct(){
-
 
     // console.log (productNameInput.value);
     // console.log (productPriceInput.value);
@@ -90,15 +96,12 @@ function addProduct(){
         category: productCategoryInput.value ,
         desc: productDescriptionInput.value ,
     }
-
-// If condition added from my side to validate name anw url
-
-        var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-        var regex = new RegExp(expression);
-
+    // to add inside product list array
     productList.push(product);
+    // console.log(productList);
+
+     // to add inside local stotage array
     localStorage.setItem("products",JSON.stringify(productList));
-    console.log(productList);
 
     // clearform is ready created function below
     clearForm();
@@ -107,6 +110,8 @@ function addProduct(){
      // displayData is ready created function below
     displayData();
 }
+
+
 
 // we can use this clear form anywhere
 function clearForm (){
@@ -136,13 +141,14 @@ function displayData(){
 
 }
 
+// start delate operation
 function deleteProduct(elementNumber){
     productList.splice(elementNumber,1);
     localStorage.setItem("products",JSON.stringify(productList));
     displayData();
 }
 
-// explain for some sting method we will use
+// explain for some sting method we will use for search operation
 
 // return true or false and it is sensitive
 // console.log("ahmed menisy".includes("ah") );
@@ -152,7 +158,8 @@ function deleteProduct(elementNumber){
 
 
 
-// search is a filter display and we will use disply code and modify it
+// search is a filtered (display function) and we will use disply code and modify it
+// we add extra of display code vaiable for the condition and if ststment to do the search
 
 function searchProduct(){
     var term =searchInput.value;
@@ -172,11 +179,15 @@ function searchProduct(){
     </tr>`
     }    
 }
-    // console.log(cartona);
     document.getElementById("tableBody").innerHTML = cartona;
 }
 
-// update is same as add with some modification
+
+
+// update is same as (add operation) with some modification
+// it will be on 2 steps as per below 2 functions
+// first we will add the product inside the input table
+// second stepwe will update the modified product
 
 function setData(index){
     // alert(index);
