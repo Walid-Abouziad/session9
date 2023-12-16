@@ -1,5 +1,5 @@
 // array method
-var friends = ["ahmed" , "bahnsy" , "usama" , "mohamed" , "ibrahim"]
+// var friends = ["ahmed" , "bahnsy" , "usama" , "mohamed" , "ibrahim"]
 
 // for sort
 // friends.sort();
